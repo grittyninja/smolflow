@@ -1,12 +1,14 @@
-# SmolFlow Framework
+# smolFlow Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](#)
 <!-- Add other badges like build status, npm version if applicable -->
 
-SmolFlow is a lightweight JavaScript framework that uses a **node-based** approach to orchestrate synchronous and asynchronous workflows. It is particularly well-suited for building multi-step agents, data processing pipelines, or any application requiring a sequence of operations with conditional logic, retry mechanisms, and a shared context. The design is inspired by graph-based execution models and promotes clear separation of concerns. It draws inspiration from concepts discussed in articles like ["LLM Agent Internal as a Graph: Tutorial for Dummies"](https://medium.com/@zh2408/llm-agent-internal-as-a-graph-tutorial-for-dummies-9d80d2d46547) and minimalist workflow engines such as PocketFlow.
+![smolFlow Logo](static/smolFlow.png)
 
-SmolFlow is self-contained with no external dependencies for its core functionality.
+smolFlow is a lightweight JavaScript framework that uses a **node-based** approach to orchestrate synchronous and asynchronous workflows. It is particularly well-suited for building multi-step agents, data processing pipelines, or any application requiring a sequence of operations with conditional logic, retry mechanisms, and a shared context. The design is inspired by graph-based execution models and promotes clear separation of concerns. It draws inspiration from concepts discussed in articles like ["LLM Agent Internal as a Graph: Tutorial for Dummies"](https://medium.com/@zh2408/llm-agent-internal-as-a-graph-tutorial-for-dummies-9d80d2d46547) and minimalist workflow engines such as PocketFlow.
+
+smolFlow is self-contained with no external dependencies for its core functionality.
 
 ## Table of Contents
 
@@ -54,7 +56,7 @@ SmolFlow is self-contained with no external dependencies for its core functional
 
 ### Nodes (The Building Blocks)
 
-Nodes are individual units of work. SmolFlow provides several base classes for creating nodes:
+Nodes are individual units of work. smolFlow provides several base classes for creating nodes:
 
 *   **`FlowFramework.BaseNode`**: The fundamental class for all nodes.
     *   `prep(shared)`: Synchronous method to prepare data or context. Receives the `shared` context.
@@ -110,7 +112,7 @@ By default, these methods re-throw the error, which will propagate up from the `
 
 ### Batch Processing
 
-SmolFlow includes specialized nodes and flows for processing collections of items or parameters:
+smolFlow includes specialized nodes and flows for processing collections of items or parameters:
 
 *   **Batch Nodes**:
     *   `FlowFramework.BatchNode`: Synchronously processes an array of items, calling `exec` for each.
@@ -123,7 +125,7 @@ SmolFlow includes specialized nodes and flows for processing collections of item
 
 ## Installation
 
-Currently, SmolFlow is used by directly including the `src/smolflow.js` file in your project.
+Currently, smolFlow is used by directly including the `src/smolflow.js` file in your project.
 
 **Browser:**
 ```html
@@ -146,7 +148,7 @@ const myNode = new FlowFramework.AsyncNode();
 ```
 (Note: For native ES module support in Node.js without a build step, `smolflow.js` might need slight adjustments to its export patterns or you'd use a transpiler.)
 
-In the future, SmolFlow might be available as an npm package.
+In the future, smolFlow might be available as an npm package.
 
 ## Getting Started
 
@@ -327,17 +329,17 @@ The framework version is available via `FlowFramework.VERSION` (e.g., '1.0.0').
 
 ## Example Application: AI Search Agent
 
-The `examples/search_agent/` directory contains a fully functional AI-powered search agent built using SmolFlow. This example demonstrates:
+The `examples/search_agent/` directory contains a fully functional AI-powered search agent built using smolFlow. This example demonstrates:
 *   Using an LLM to make decisions (`DecideActionNode`).
 *   Interacting with external APIs (`SearchWebNode` via a proxy).
 *   Structuring a conversational agent flow.
 *   Managing configuration and UI updates via the `shared` context.
 
-Refer to `examples/search_agent/README.md` (if available) or explore the files in that directory, particularly `assets/js/app.js` and `assets/js/agent-nodes.js`, for a practical application of SmolFlow.
+Refer to `examples/search_agent/README.md`, particularly `assets/js/app.js` and `assets/js/agent-nodes.js`, for a practical application of smolFlow.
 
 ## Customization & Extension
 
-*   **Create Custom Nodes**: The primary way to use SmolFlow is by creating your own node classes tailored to your application's tasks. Override `prep`, `exec`, `post` (and their `Async` counterparts) as needed.
+*   **Create Custom Nodes**: The primary way to use smolFlow is by creating your own node classes tailored to your application's tasks. Override `prep`, `exec`, `post` (and their `Async` counterparts) as needed.
 *   **Shared Context Design**: Carefully design the `shared` object structure. It's the backbone of communication between your nodes.
 *   **Error Handling Strategy**: Decide whether to handle errors within `execFallback`/`execFallbackAsync` (e.g., to set a default state or try an alternative path) or let them propagate to be caught by the caller of `flow.runAsync()`.
 *   **Custom Warning Handlers**: Use `FlowFramework.utils.addWarningHandler` to integrate framework warnings with your application's logging system.

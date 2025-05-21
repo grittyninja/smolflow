@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmolFlow Search Agent</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>SmolFlow Search Agent</h1>
+    </header>
+
+    <main>
+        <section id="config-section" class="collapsible-section">
+            <button id="toggle-config-btn" class="collapsible-trigger" aria-expanded="false" aria-controls="config-content">
+                Settings <span>&#9660;</span>
+            </button>
+            <div id="config-content" class="collapsible-content" role="region" aria-hidden="true">
+                <h2>Configuration</h2>
+                <div class="form-group">
+                    <label for="llmBaseUrl">LLM Base URL:</label>
+                    <input type="text" id="llmBaseUrl" name="llmBaseUrl" placeholder="e.g., https://openrouter.ai/api/v1">
+                </div>
+                <div class="form-group">
+                    <label for="llmApiKey">LLM API Key:</label>
+                    <input type="password" id="llmApiKey" name="llmApiKey" placeholder="Enter your LLM API Key">
+                </div>
+                <div class="form-group">
+                    <label for="llmModel">LLM Model:</label>
+                    <input type="text" id="llmModel" name="llmModel" placeholder="e.g., openai/gpt-4o">
+                </div>
+                <div class="form-group">
+                    <label for="braveApiKey">Brave Search API Key:</label>
+                    <input type="password" id="braveApiKey" name="braveApiKey" placeholder="Enter your Brave Search API Key">
+                </div>
+                <hr>
+                <h3>Advanced Settings:</h3>
+                <div class="form-group">
+                    <label for="apiCallRetryDelaySeconds">API Call Retry Delay (seconds):</label>
+                    <input type="number" id="apiCallRetryDelaySeconds" name="apiCallRetryDelaySeconds" min="0" placeholder="e.g., 5">
+                </div>
+                <div class="form-group">
+                    <label for="maxApiRetries">Max API Retries (on failure):</label>
+                    <input type="number" id="maxApiRetries" name="maxApiRetries" min="0" placeholder="e.g., 3">
+                </div>
+                <div class="form-group">
+                    <label for="maxSearchResultsPerCall">Search Results Per API Call:</label>
+                    <input type="number" id="maxSearchResultsPerCall" name="maxSearchResultsPerCall" min="1" max="20" placeholder="e.g., 10">
+                </div>
+                <div class="form-group">
+                    <label for="maxAgentSearchAttempts">Max Agent Search Loops:</label>
+                    <input type="number" id="maxAgentSearchAttempts" name="maxAgentSearchAttempts" min="1" placeholder="e.g., 3">
+                </div>
+                <button id="save-settings-btn">Save Settings</button>
+                <p id="config-status" class="status-message"></p>
+            </div>
+        </section>
+
+        <section id="interaction-section">
+            <h2>Ask a Question</h2>
+            <div class="form-group">
+                <textarea id="question-input" name="question" rows="3" placeholder="e.g., Who won the Nobel Prize in Physics 2024?"></textarea>
+            </div>
+            <button id="ask-question-btn">Ask Question</button>
+        </section>
+
+        <section id="progress-section">
+            <h2>Agent Progress</h2>
+            <div id="progress-stepper">
+                <!-- Stepper will be dynamically populated by JS -->
+                <div class="step" data-step-key="IDLE">Idle</div>
+                <div class="step" data-step-key="DECIDING">Deciding</div>
+                <div class="step" data-step-key="SEARCHING">Searching</div>
+                <div class="step" data-step-key="ANSWERING">Answering</div>
+                <div class="step" data-step-key="DONE">Done</div>
+                <div class="step" data-step-key="ERROR">Error</div>
+            </div>
+            <div id="loading-indicator" class="hidden">Processing...</div>
+        </section>
+
+        <section id="output-section">
+            <h2>Agent Log</h2>
+            <div id="log-output">
+                <!-- Log entries will be dynamically populated here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Powered by SmolFlow</p>
+    </footer>
+
+    <script src="../../src/smolflow.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/api-services.js"></script>
+    <script src="assets/js/ui-manager.js"></script>
+    <script src="assets/js/agent-nodes.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
